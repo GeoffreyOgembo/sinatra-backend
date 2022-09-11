@@ -1,12 +1,11 @@
-# This is an _environment variable_ that is used by some of the Rake tasks to determine
-# if our application is running locally in development, in a test environment, or in production
 require 'bundler/setup'Bundler.require
-# configure :development do#   ENV['SINATRA_ENV'] ||= "development"
-#   ActiveRecord::Base.establish_connection(#     :adapter => "sqlite3",#     :database => "db/development#{ENV['SINATRA_ENV']}.sqlite"#   )# end
+Bundler.require
+
 configure :production do 
      db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
   
-     ActiveRecord::Base.establish_connection(  
+    
+ActiveRecord::Base.establish_connection(  
     :adapter => db.scheme == 'postgres' ? 'postgresql' 
     :db.scheme,    
     :host     => db.host,    
